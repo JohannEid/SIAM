@@ -49,6 +49,9 @@ void choose_action( std::unique_ptr<Player>& my_player,
 
 
             }
+            else
+                throw std::domain_error("Can't choose to perform rotate action (no pawns on board)");
+
 
 
 

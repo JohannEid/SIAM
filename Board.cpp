@@ -178,7 +178,7 @@ void Board::move(std::unique_ptr<Player> &player) {
                 compteur++;
                 std::cout << compteur << std::endl;
 
-            } while ((x < board_width) && (x >= 0) && (y < board_height) && (y >= 0));
+            } while ((x < board_width) && (x > 0) && (y < board_height) && (y > 0));
 
         } else {
             std::cout << "Can't push this line your total strenght is : " << total_strenght
