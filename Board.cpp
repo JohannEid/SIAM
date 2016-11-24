@@ -151,34 +151,31 @@ void Board::move(std::unique_ptr<Player> &player) {
             x = position_x - 1;
             y = position_y - 1;
             std::shared_ptr<Object> temp{board[x][y]};
-            std::shared_ptr<Object> temp2{nullptr};
-            int compteur{0};
+            std::shared_ptr<Object> temp2{std::make_shared<Empty>()};
+            int compteur {0};
 
 
             do {
-                //cas particulier
-                if ((x == position_x - 1) && (y == position_y - 1)) {
-                    board[x][y] = std::make_shared<Empty>();
-                }
-                //décale
+
+
+
+                board[x][y]=temp2;
                 x += my_direction.first;
                 y += my_direction.second;
                 //copie case arrivee
                 temp2 = board[x][y];
-                //affecte arrivée à départ
                 board[x][y] = temp;
-                //décale arrivée 2
-                std::cout << x << y << std::endl;
                 x += my_direction.first;
                 y += my_direction.second;
                 //affecte arrivé 2 à départ
                 temp = board[x][y];
                 board[x][y] = temp2;
-                std::cout << x << y << std::endl;
                 compteur++;
-                std::cout << compteur << std::endl;
 
-            } while ((x < board_width) && (x > 0) && (y < board_height) && (y > 0));
+
+
+            } while ((x <= board_width - 1) && (x >= 0) && (y <= board_height-1 ) && (y >= 0));
+            std::cout<<"number of turns" << compteur<<std::endl;
 
         } else {
             std::cout << "Can't push this line your total strenght is : " << total_strenght
