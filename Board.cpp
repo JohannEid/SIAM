@@ -152,22 +152,33 @@ void Board::move(std::unique_ptr<Player> &player) {
 
             while (true) {
 
-                if (board[x + my_direction.first][y + my_direction.second]
-                            ->getFront_resistance() != 0) {
+                if ((board[x + my_direction.first][y + my_direction.second]
+                             ->getFront_resistance() != 0) && ((x + my_direction.first >= 0) &&
+                                                               (y + my_direction.second >= 0)
+                                                               && (x + my_direction.first <= board_width - 1)
+                                                               && (y + my_direction.second <= board_height - 1))) {
                     x += my_direction.first;
                     y += my_direction.second;
 
-                }
-                else
+                } else
                     break;
                 std::cout << "my pawn" << x << y << std::endl;
 
             }
             while (true) {
                 if ((x == position_x - 1) && (y == position_y - 1)) {
-                    board[x + my_direction.first][y + my_direction.second] = board[x][y];
-                    board[x][y] = std::make_shared<Empty>();
-                    break;
+                    if ((x + my_direction.first >= 0) && (y + my_direction.second >= 0)
+                        || (x + my_direction.first <= board_width - 1)
+                        || (y + my_direction.second <= board_height - 1)) {
+                        board[x][y] = std::make_shared<Empty>();
+                        break;
+
+                    } else {
+                        board[x][y] = std::make_shared<Empty>();
+                        board[x + my_direction.first][y + my_direction.second] = board[x][y];
+                        break;
+                    }
+
                 } else if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
                            || (x + my_direction.first > board_width - 1)
                            || (y + my_direction.second > board_height - 1)) {
