@@ -153,9 +153,15 @@ void Board::move(std::unique_ptr<Player> &player) {
             std::shared_ptr<Object> temp{board[x][y]};
             std::shared_ptr<Object> temp2{std::make_shared<Empty>()};
             int compteur {0};
+            while (board[x][y]->getFront_resistance()!=0)
+            {
+                x += my_direction.first;
+                y += my_direction.second;
+            }
+            
 
 
-            do {
+           /* do {
 
 
 
@@ -174,8 +180,9 @@ void Board::move(std::unique_ptr<Player> &player) {
 
 
 
-            } while ((x <= board_width - 1) && (x >= 0) && (y <= board_height-1 ) && (y >= 0));
+            } while ((x < board_width - 1) && (x > 0) && (y < board_height-1 ) && (y > 0));
             std::cout<<"number of turns" << compteur<<std::endl;
+            */
 
         } else {
             std::cout << "Can't push this line your total strenght is : " << total_strenght
