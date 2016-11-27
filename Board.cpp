@@ -151,31 +151,36 @@ void Board::move(std::unique_ptr<Player> &player) {
             y = position_y - 1;
 
             while (true) {
+                if ((x + my_direction.first >= 0) &&
+                    (y + my_direction.second >= 0)
+                    && (x + my_direction.first <= board_width - 1)
+                    && (y + my_direction.second <= board_height - 1)) {
 
-                if ((board[x + my_direction.first][y + my_direction.second]
-                             ->getFront_resistance() != 0) && ((x + my_direction.first >= 0) &&
-                                                               (y + my_direction.second >= 0)
-                                                               && (x + my_direction.first <= board_width - 1)
-                                                               && (y + my_direction.second <= board_height - 1))) {
-                    x += my_direction.first;
-                    y += my_direction.second;
+                    if ((board[x + my_direction.first][y + my_direction.second]
+                                 ->getFront_resistance() != 0)) {
+                        x += my_direction.first;
+                        y += my_direction.second;
+
+                    } else
+                        break;
 
                 } else
                     break;
+
                 std::cout << "my pawn" << x << y << std::endl;
 
             }
             while (true) {
                 if ((x == position_x - 1) && (y == position_y - 1)) {
-                    if ((x + my_direction.first >= 0) && (y + my_direction.second >= 0)
-                        || (x + my_direction.first <= board_width - 1)
-                        || (y + my_direction.second <= board_height - 1)) {
+                    if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
+                        || (x + my_direction.first > board_width - 1)
+                        || (y + my_direction.second > board_height - 1)) {
                         board[x][y] = std::make_shared<Empty>();
                         break;
 
                     } else {
-                        board[x][y] = std::make_shared<Empty>();
                         board[x + my_direction.first][y + my_direction.second] = board[x][y];
+                        board[x][y] = std::make_shared<Empty>();
                         break;
                     }
 
@@ -192,30 +197,6 @@ void Board::move(std::unique_ptr<Player> &player) {
 
             }
 
-
-
-            /* do {
-
-
-
-                 board[x][y]=temp2;
-                 x += my_direction.first;
-                 y += my_direction.second;
-                 //copie case arrivee
-                 temp2 = board[x][y];
-                 board[x][y] = temp;
-                 x += my_direction.first;
-                 y += my_direction.second;
-                 //affecte arrivé 2 à départ
-                 temp = board[x][y];
-                 board[x][y] = temp2;
-                 compteur++;
-
-
-
-             } while ((x < board_width - 1) && (x > 0) && (y < board_height-1 ) && (y > 0));
-             std::cout<<"number of turns" << compteur<<std::endl;
-             */
 
         } else {
             std::cout << "Can't push this line your total strenght is : " << total_strenght
