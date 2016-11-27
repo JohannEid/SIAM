@@ -27,7 +27,7 @@ using pointer_to_animal = std::shared_ptr<Animal>;
 class Board {
 private:
     std::vector<std::vector<pointer_to_object>> board;
-    int victory_condition = 0;
+    static int victory_condition;
 
 
     std::pair<int,int> directionToPair(char edirection);
@@ -75,7 +75,7 @@ public:
         return board[position_x][position_y];
     }
 
-    int getVictory_condition() const {
+    static int getVictory_condition() {
         return victory_condition;
     }
 
@@ -86,7 +86,7 @@ public:
     }
 
 
-    void setVictory_condition(int victory_condition) {
+    static void setVictory_condition(int victory_condition) {
         Board::victory_condition = victory_condition;
     }
 

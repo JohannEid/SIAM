@@ -5,7 +5,6 @@
 #include "Player sub_methods.h"
 
 
-
 void choose_action(std::unique_ptr<Player> &my_player,
                    std::unique_ptr<Board> &board) {
     unsigned int entry{0};
@@ -17,6 +16,8 @@ void choose_action(std::unique_ptr<Player> &my_player,
             std::cout << "2.Exit a pawn" << std::endl;
             std::cout << "3.Move a pawn" << std::endl;
             std::cout << "4.Rotate a pawn " << std::endl;
+            std::cout << "5.Forfeit the game " << std::endl;
+
 
             std::cin >> entry;
 
@@ -27,33 +28,30 @@ void choose_action(std::unique_ptr<Player> &my_player,
                 throw std::domain_error("Can't choose to perform this action");
 
             }
-            if ((entry == 2) && (!board->canExit(my_player).empty())) {
+            else if ((entry == 2) && (!board->canExit(my_player).empty())) {
                 board->exit(my_player);
                 break;
             } else if ((entry == 2) && (board->canExit(my_player).empty())) {
                 throw std::domain_error("Can't choose to perform exit action (no pawns in exit position)");
             }
-            if ((entry == 3) && (my_player->getCompteur() > 0)) {
+            else if ((entry == 3) && (my_player->getCompteur() > 0)) {
                 board->move(my_player);
                 break;
             } else if ((entry == 3) && (!my_player->getCompteur() > 0)) {
                 throw std::domain_error("Can't choose to perform move action (no pawns on board)");
             }
-            if ((entry == 4) && (my_player->getCompteur() > 0)) {
+           else  if ((entry == 4) && (my_player->getCompteur() > 0)) {
                 board->rotate(my_player);
                 break;
             } else if ((entry == 4) && (!my_player->getCompteur() > 0)) {
                 throw std::domain_error("Can't choose to perform rotate action (no pawns on board)");
-
-
             }
-            if ((entry == 5) && (my_player->getSide() == Player_side::LHS)) {
-                board->setVictory_condition(1);
+           else  if ((entry == 5)) {
+                (my_player->getSide()==Player_side ::LHS)? Board :: setVictory_condition(1):Board ::setVictory_condition(2);
+                break;
             }
-            if ((entry == 6) && (my_player->getSide() == Player_side::RHS)) {
-                board->setVictory_condition(2);
-            } else
-                throw std::domain_error("Can't choose to perform rotate action (no pawns on board)");
+             else
+                throw std::domain_error("Can't choose to perform rotate action ");
 
 
         }

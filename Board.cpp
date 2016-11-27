@@ -1,7 +1,7 @@
 #include "Board.h"
 #include "Player.h"
-
-Board::Board() {
+int Board::victory_condition = 0;
+Board::Board(){
 
     Board::board.resize(board_width, std::vector<std::shared_ptr<Object>>
             (board_height, std::make_shared<Empty>()));
