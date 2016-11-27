@@ -157,19 +157,24 @@ void Board::move(std::unique_ptr<Player> &player) {
                     x += my_direction.first;
                     y += my_direction.second;
 
-                } else
+                }
+                else
                     break;
                 std::cout << "my pawn" << x << y << std::endl;
 
             }
-            while ((x != position_x - 1) ||  (y != position_y - 1)) {
-                if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
-                    || (x + my_direction.first > board_width - 1)
-                    || (y + my_direction.second > board_height - 1)) {
+            while (true) {
+                if ((x == position_x - 1) && (y == position_y - 1)) {
+                    board[x + my_direction.first][y + my_direction.second] = board[x][y];
+                    board[x][y] = std::make_shared<Empty>();
+                    break;
+                } else if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
+                           || (x + my_direction.first > board_width - 1)
+                           || (y + my_direction.second > board_height - 1)) {
                     board[x][y] = std::make_shared<Empty>();
                 } else {
                     board[x + my_direction.first][y + my_direction.second] = board[x][y];
-                    std::cout<<"chco"<<std::endl;
+                    std::cout << "chco" << std::endl;
                 }
                 x -= my_direction.first;
                 y -= my_direction.second;
