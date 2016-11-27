@@ -187,6 +187,46 @@ void Board::move(std::unique_ptr<Player> &player) {
                            || (x + my_direction.first > board_width - 1)
                            || (y + my_direction.second > board_height - 1)) {
                     board[x][y] = std::make_shared<Empty>();
+                    if (board[x][y]->getFront_resistance() == 0.09) {
+                        int compteur_of_player_lhs{0};
+                        int compteur_of_player_rhs{0};
+
+
+                        if (x - 1 >= 0) {
+                            if (board[x - 1][y]->getSide() == Player_side::LHS)
+                                compteur_of_player_lhs++;
+                            else if (board[x - 1][y]->getSide() == Player_side::RHS)
+                                compteur_of_player_rhs++;
+                        }
+                        if (x + 1 <= board_width - 1) {
+                            if (board[x + 1][y]->getSide() == Player_side::LHS)
+                                compteur_of_player_lhs++;
+                            else if (board[x + 1][y]->getSide() == Player_side::RHS)
+                                compteur_of_player_rhs++;
+
+                        }
+                        if (y - 1 >= 0) {
+                            if (board[x][y - 1]->getSide() == Player_side::LHS)
+                                compteur_of_player_lhs++;
+                            else if (board[x][y - 1]->getSide() == Player_side::RHS)
+                                compteur_of_player_rhs++;
+                        }
+                        if (y + 1 <= board_height - 1) {
+                            if (board[x][y + 1]->getSide() == Player_side::LHS)
+                                compteur_of_player_lhs++;
+                            else if (board[x][y + 1]->getSide() == Player_side::RHS)
+                                compteur_of_player_rhs++;
+                        }
+                        if (compteur_of_player_lhs > compteur_of_player_rhs) {
+                            my_condition_victory = 1;
+
+                        } else if (compteur_of_player_lhs < compteur_of_player_rhs) {
+                            my_condition_victory = 1;
+                        }
+
+
+                    }
+
                 } else {
                     board[x + my_direction.first][y + my_direction.second] = board[x][y];
                 }
@@ -333,10 +373,9 @@ std::pair<int, int> Board::getCoordinates() {
                 ((position_y == min_board_height) && ((min_board_width <= position_x) && (position_x <= board_width)))
                 || ((position_x == board_width) && ((min_board_height <= position_y) && (position_y <= board_height)))
                 || ((position_y == board_height) && ((min_board_width <= position_x) && (position_x <= board_width)))) {
-                if (board[position_x-1][position_y-1]->getFront_resistance() == 0)
+                if (board[position_x - 1][position_y - 1]->getFront_resistance() == 0)
                     return std::make_pair(position_x - 1, position_y - 1);
-                else
-                {
+                else {
                     throw std::domain_error("Invalid use of coodinates selection for "
                                                     "pawn entering (already a pawn in place ");
                 }

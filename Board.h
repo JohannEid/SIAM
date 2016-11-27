@@ -17,6 +17,8 @@ const int mountain_x = 2;
 const int number_of_mountain = 3;
 const int side_distance = 1;
 
+int my_condition_victory{0};
+
 using pointer_to_object = std::shared_ptr<Object>;
 using pointer_to_animal = std::shared_ptr<Animal>;
 
