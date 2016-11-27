@@ -167,7 +167,6 @@ void Board::move(std::unique_ptr<Player> &player) {
                 } else
                     break;
 
-                std::cout << "my pawn" << x << y << std::endl;
 
             }
             while (true) {
@@ -190,7 +189,6 @@ void Board::move(std::unique_ptr<Player> &player) {
                     board[x][y] = std::make_shared<Empty>();
                 } else {
                     board[x + my_direction.first][y + my_direction.second] = board[x][y];
-                    std::cout << "chco" << std::endl;
                 }
                 x -= my_direction.first;
                 y -= my_direction.second;
@@ -335,7 +333,15 @@ std::pair<int, int> Board::getCoordinates() {
                 ((position_y == min_board_height) && ((min_board_width <= position_x) && (position_x <= board_width)))
                 || ((position_x == board_width) && ((min_board_height <= position_y) && (position_y <= board_height)))
                 || ((position_y == board_height) && ((min_board_width <= position_x) && (position_x <= board_width)))) {
-                return std::make_pair(position_x - 1, position_y - 1);
+                if (board[position_x-1][position_y-1]->getFront_resistance() == 0)
+                    return std::make_pair(position_x - 1, position_y - 1);
+                else
+                {
+                    throw std::domain_error("Invalid use of coodinates selection for "
+                                                    "pawn entering (already a pawn in place ");
+                }
+
+
             } else
                 throw std::domain_error("Invalid use of coodinates selection for pawn entering ");
 
