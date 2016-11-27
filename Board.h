@@ -6,6 +6,7 @@
 #define SIAM02_BOARD_H
 
 #include "Object.h"
+#include "Header.h"
 
 class Player;
 
@@ -17,7 +18,6 @@ const int mountain_x = 2;
 const int number_of_mountain = 3;
 const int side_distance = 1;
 
-int my_condition_victory{0};
 
 using pointer_to_object = std::shared_ptr<Object>;
 using pointer_to_animal = std::shared_ptr<Animal>;
@@ -27,6 +27,7 @@ using pointer_to_animal = std::shared_ptr<Animal>;
 class Board {
 private:
     std::vector<std::vector<pointer_to_object>> board;
+    int victory_condition = 0;
 
 
     std::pair<int,int> directionToPair(char edirection);
@@ -56,6 +57,16 @@ public:
     ///display
     void display();
 
+    const std::vector<std::vector<pointer_to_object>> &getBoard() const {
+        return board;
+    }
+
+    void setBoard(const std::vector<std::vector<pointer_to_object>> &board) {
+        Board::board = board;
+    }
+
+
+
 
 
     ///GETTER
@@ -64,9 +75,19 @@ public:
         return board[position_x][position_y];
     }
 
+    int getVictory_condition() const {
+        return victory_condition;
+    }
+
+
 ///SETTER
     void setBoard(const int i, const int j,const std::shared_ptr<Object>& my_object) {
         Board::board[i][j]=my_object;
+    }
+
+
+    void setVictory_condition(int victory_condition) {
+        Board::victory_condition = victory_condition;
     }
 
 };

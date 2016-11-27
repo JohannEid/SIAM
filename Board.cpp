@@ -218,10 +218,10 @@ void Board::move(std::unique_ptr<Player> &player) {
                                 compteur_of_player_rhs++;
                         }
                         if (compteur_of_player_lhs > compteur_of_player_rhs) {
-                            my_condition_victory = 1;
+                            setVictory_condition(1);
 
                         } else if (compteur_of_player_lhs < compteur_of_player_rhs) {
-                            my_condition_victory = 1;
+                            setVictory_condition(2);
                         }
 
 

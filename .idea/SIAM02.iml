@@ -6,12 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Player sub_methods.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Player sub_methods.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Object.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Header.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Player sub_methods.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Player.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Board.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Player.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Object.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Board.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

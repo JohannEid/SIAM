@@ -12,6 +12,25 @@ int main() {
     choose_action(p_lhs,board);
     board->display();
     choose_action(p_rhs,board);
+
+    board->display();
+    choose_action(p_lhs,board);
+    board->display();
+    choose_action(p_rhs,board);
+
+    board->display();
+    choose_action(p_lhs,board);
+    board->display();
+    choose_action(p_rhs,board);
+
+    board->display();
+    choose_action(p_lhs,board);
+    board->display();
+    choose_action(p_rhs,board);
+    board->display();
+    choose_action(p_lhs,board);
+    board->display();
+    choose_action(p_rhs,board);
     board->display();
     choose_action(p_lhs,board);
     board->display();
