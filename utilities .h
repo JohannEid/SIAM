@@ -14,6 +14,12 @@ void saveFile(const std::unique_ptr<Board>&,
               const std::unique_ptr<Player>&,
               const std::unique_ptr<Player>& );
 
+void loadFile();
+
+
+void clear();
+
+
 
 
 #endif //SIAM02_UTILITIES_H

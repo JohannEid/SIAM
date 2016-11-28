@@ -39,3 +39,20 @@ void saveFile(const std::unique_ptr<Board> &my_board,
 
 
 }
+/*
+void loadFile() {
+    std::string line;
+    std::ifstream my_file ("my_save_game.txt");
+    if(my_file.is_open())
+    {
+
+    }
+
+}
+ */
+
+void clear()
+{
+    std::cout<<std::string(100,'\n');
+}
+
