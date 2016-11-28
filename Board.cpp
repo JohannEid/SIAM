@@ -72,6 +72,7 @@ void Board::exit(std::unique_ptr<Player> &player) {
         try {
             std::cin >> position_x;
             std::cin >> position_y;
+            clear();
             if ((coordinates_exit.find(position_x) != coordinates_exit.end()) &&
                 (coordinates_exit[position_x] == position_y)) {
                 board[position_x - 1][position_y - 1] = std::make_shared<Empty>();
@@ -263,6 +264,7 @@ void Board::rotate(std::unique_ptr<Player> &player) {
         // while (true){
         std::cout << "Please enter your new direction " << std::endl;
         std::cin >> direction_entry;
+        clear();
         switch (direction_entry) {
             case 't' :
                 if (board[position_x - 1][position_y - 1]->getDirection() != 't') {
@@ -389,6 +391,7 @@ std::pair<int, int> Board::getCoordinates() {
             std::cerr << "Erreur" << e.what() << std::endl;
 
         }
+
 
 
     }

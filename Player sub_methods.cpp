@@ -10,7 +10,12 @@ void choose_action(std::unique_ptr<Player> &my_player,
     unsigned int entry{0};
     while (true) {
         try {
-
+            clear();
+            std::cout << "******************** MY BOARD  *************************"<<std::endl;
+            board->display();
+            std::cout <<"********************//////*******************************"<<std::endl;
+            std::cout<<std::endl;
+            std::cout<<std::endl;
             std::cout << "Please " << my_player->getName() << " enter an action" << std::endl;
             std::cout << "1.Enter a pawn" << std::endl;
             std::cout << "2.Exit a pawn" << std::endl;
@@ -19,7 +24,10 @@ void choose_action(std::unique_ptr<Player> &my_player,
             std::cout << "5.Forfeit the game " << std::endl;
 
 
+
             std::cin >> entry;
+            clear();
+
 
             if ((entry == 1) && (my_player->getCompteur() < max_pawn_number)) {
                 board->enter_a_pawn(my_player);

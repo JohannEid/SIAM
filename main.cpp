@@ -19,7 +19,6 @@ int main() {
             break;
         }
 
-        board->display();
         //call of choose function for right player
 
         //if right player concedes or left player exits mountain so right wins
@@ -29,8 +28,6 @@ int main() {
             std::cout << "PLayer : " << p_lhs->getName() << " wins!" << std::endl;
             break;
         }
-
-        board->display();
 
     }
     saveFile(board,p_lhs,p_rhs);

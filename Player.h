@@ -7,6 +7,7 @@
 
 #include "Header.h"
 #include "Board.h"
+#include "utilities .h"
 
 const int max_pawn_number = 5;
 
