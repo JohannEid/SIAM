@@ -1,7 +1,9 @@
 #include "Board.h"
 #include "Player.h"
+
 int Board::victory_condition = 0;
-Board::Board(){
+
+Board::Board() {
 
     Board::board.resize(board_width, std::vector<std::shared_ptr<Object>>
             (board_height, std::make_shared<Empty>()));
@@ -62,17 +64,18 @@ void Board::exit(std::unique_ptr<Player> &player) {
     int position_x{0};
     int position_y{0};
     std::map<int, int> coordinates_exit{canExit(player)};
-
+    display();
     auto it = coordinates_exit.begin();
     while (it != coordinates_exit.end()) {
         std::cout << "x: " << it->first << " :: " << "y: " << it->second << std::endl;
         it++;
     }
+
     while (true) {
+
         try {
             std::cin >> position_x;
             std::cin >> position_y;
-            clear();
             if ((coordinates_exit.find(position_x) != coordinates_exit.end()) &&
                 (coordinates_exit[position_x] == position_y)) {
                 board[position_x - 1][position_y - 1] = std::make_shared<Empty>();
@@ -254,7 +257,7 @@ void Board::rotate(std::unique_ptr<Player> &player) {
 
     char direction_entry{' '};
 
-
+    display();
     displayPawnCoordinates(player);
     std::pair<int, int> my_pawn_coordinates = chooseAPawn(player);
     int position_x{my_pawn_coordinates.first};
@@ -363,6 +366,7 @@ std::pair<int, int> Board::getCoordinates() {
 
     while (true) {
 
+        display();
         std::cout << "Please enter the coordinates you want to select" << std::endl;
         std::cout << "Position in x: " << std::endl;
         std::cout << "Position in y: " << std::endl;
@@ -393,11 +397,13 @@ std::pair<int, int> Board::getCoordinates() {
         }
 
 
-
     }
 }
 
 void Board::display() {
+
+    clear();
+    std::cout << "******************** MY BOARD  *************************" << std::endl;
 
     for (unsigned int i(0); i < board_width; i++) {
         for (unsigned int j(0); j < board_height; j++) {
@@ -409,6 +415,10 @@ void Board::display() {
         }
         std::cout << std::endl;
     }
+    std::cout << "********************//////*******************************" << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+
 }
 
 std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
@@ -417,6 +427,7 @@ std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
 
     while (true) {
         try {
+            display();
             std::cin >> position_x;
             std::cin >> position_y;
             if (board[position_x - 1][position_y - 1]->getSide() == player->getSide())

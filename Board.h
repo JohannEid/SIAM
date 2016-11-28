@@ -57,6 +57,8 @@ public:
     ///display
     void display();
 
+
+
     const std::vector<std::vector<pointer_to_object>> &getBoard() const {
         return board;
     }

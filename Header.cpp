@@ -6,3 +6,4 @@ void clear()
 {
     std::cout<<std::string(100,'\n');
 }
+

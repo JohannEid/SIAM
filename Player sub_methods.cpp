@@ -10,13 +10,10 @@ void choose_action(std::unique_ptr<Player> &my_player,
     unsigned int entry{0};
     while (true) {
         try {
-            clear();
-            std::cout << "******************** MY BOARD  *************************"<<std::endl;
             board->display();
-            std::cout <<"********************//////*******************************"<<std::endl;
-            std::cout<<std::endl;
-            std::cout<<std::endl;
+
             std::cout << "Please " << my_player->getName() << " enter an action" << std::endl;
+            std::cout<<"**********************************************************"<<std::endl;
             std::cout << "1.Enter a pawn" << std::endl;
             std::cout << "2.Exit a pawn" << std::endl;
             std::cout << "3.Move a pawn" << std::endl;
