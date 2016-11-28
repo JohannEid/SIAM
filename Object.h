@@ -27,14 +27,13 @@ const float front_strenght_of_animal = 1;
 
 class Object {
 protected:
-    std::shared_ptr<Object> right_object = nullptr;
-    std::shared_ptr<Object> left_object = nullptr;
-    std::shared_ptr<Object> top_object = nullptr;
-    std::shared_ptr<Object> below_object = nullptr;
+
     float front_strenght;
     float front_resistance;
     float side_resistance;
+    //appearance
     char widget;
+    //belongs to ...
     Player_side side;
 
     Object(
@@ -65,49 +64,20 @@ public:
         return widget;
     }
 
-    const std::shared_ptr<Object> &getRight_object() const {
-        return right_object;
-    }
-
-    const std::shared_ptr<Object> &getLeft_object() const {
-        return left_object;
-    }
-
-    const std::shared_ptr<Object> &getTop_object() const {
-        return top_object;
-    }
-
-    const std::shared_ptr<Object> &getBelow_object() const {
-        return below_object;
-    }
 
     Player_side getSide() const {
         return side;
     }
 
-    virtual char getDirection() {}
+    virtual char getDirection() { return 'O'; }
+    
 
 
 
 ///SETTER
 
-    void setBelow_object(const std::shared_ptr<Object> &below_object) {
-        Object::below_object = below_object;
-    }
 
-    void setRight_object(const std::shared_ptr<Object> &right_object) {
-        Object::right_object = right_object;
-    }
-
-    void setLeft_object(const std::shared_ptr<Object> &left_object) {
-        Object::left_object = left_object;
-    }
-
-    void setTop_object(const std::shared_ptr<Object> &top_object) {
-        Object::top_object = top_object;
-    }
-
-    virtual void setEdirection(Direction edirection){}
+    virtual void setEdirection(Direction edirection) {}
 
 
 
@@ -136,8 +106,8 @@ private:
 
     Direction edirection;
     int number;
-    const char toChar(Direction direction);
 
+    const char toChar(Direction direction);
 
 
 public:
@@ -168,7 +138,6 @@ public:
         Animal::edirection = edirection;
     }
 };
-
 
 
 #endif //SIAM02_OBJECT_H
