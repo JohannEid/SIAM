@@ -19,25 +19,23 @@ void saveFile(const std::unique_ptr<Board> &my_board,
                 my_file << "O";
             else if (my_board->getObject(i, j)->getFront_resistance() == 0.9)
                 my_file << "M";
-            else if(my_board->getObject(i, j)->getFront_resistance() == 1 )
-            {
-                    my_string+=my_board->getObject(i,j)->getWidget();
-                my_string+=my_board->getObject(i,j)->getDirection();
-                my_file+=my_board->getObject(i,j)->
+            else if (my_board->getObject(i, j)->getFront_resistance() == 1) {
+                my_string += my_board->getObject(i, j)->getWidget();
+                my_string += my_board->getObject(i, j)->getDirection();
+                my_string += std::to_string(my_board->getObject(i, j)->getNumber());
+
                 my_file << my_string;
             }
 
 
-
         }
-        std::cout << std::endl;
+        my_file << std::endl;
     }
-    std::cout<<player_lhs->getCompteur()<<std::endl;
-    std::cout<<player_lhs->getName()<<std::endl;
-    std::cout<<player_rhs->getCompteur();std::endl;
-    std::cout<<player_rhs->getName()<<std::endl;
-
-
+    my_file << player_lhs->getCompteur() << std::endl;
+    my_file << player_lhs->getName() << std::endl;
+    my_file << player_rhs->getCompteur();
+    my_file << player_rhs->getName() << std::endl;
+    my_file.close();
 
 
 }

@@ -70,7 +70,9 @@ public:
     }
 
     virtual char getDirection() { return 'O'; }
-    
+
+    virtual int getNumber() const { return 0; }
+
 
 
 
@@ -123,7 +125,7 @@ public:
         return edirection;
     }
 
-    int getNumber() const {
+    int getNumber() const override {
         return number;
     }
 

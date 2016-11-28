@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "Player sub_methods.h"
+#include "utilities .h"
 
 int main() {
 
@@ -31,9 +32,9 @@ int main() {
 
         board->display();
 
-
-
     }
+    saveFile(board,p_lhs,p_rhs);
+
 
 
     return 0;
