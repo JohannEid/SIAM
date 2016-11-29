@@ -73,6 +73,8 @@ public:
 
     virtual int getNumber() const { return 0; }
 
+    virtual Direction geteDirection() const  { };
+
 
 
 
@@ -130,6 +132,11 @@ public:
     }
 
     char getDirection();
+
+    virtual Direction geteDirection() const
+    {
+        return edirection;
+    }
 
 
 

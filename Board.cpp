@@ -18,9 +18,19 @@ Board::Board() {
 
 
 void Board::enter_a_pawn(std::unique_ptr<Player> &player) {
-    Direction direction{Direction::TOP};
+    //getting set to call const
     std::pair<int, int> my_coordinates{getCoordinates()};
     char widget = (player->getSide() == Player_side::RHS) ? 'E' : 'R';
+    //by default
+    Direction direction = Direction ::TOP;
+    //once object created set true direction
+    player->setCompteur(player->getCompteur() + 1);
+    setBoard(my_coordinates.first, my_coordinates.second,
+             std::make_shared<Animal>(widget, direction, player->getCompteur(), player->getSide()));
+
+    choice_to_rotate(my_coordinates.first+1,my_coordinates.second+1);
+
+    /*
     if ((my_coordinates.first == 0) && (0 <= my_coordinates.second < board_height - 1)) {
         direction = Direction::DOWN;
     } else if ((my_coordinates.first == board_width - 1) &&
@@ -32,11 +42,8 @@ void Board::enter_a_pawn(std::unique_ptr<Player> &player) {
     } else if ((0 <= my_coordinates.first <= board_width - 1) &&
                (my_coordinates.second == board_height - 1)) {
         direction = Direction::LEFT;
+        */
 
-    }
-    player->setCompteur(player->getCompteur() + 1);
-    setBoard(my_coordinates.first, my_coordinates.second,
-             std::make_shared<Animal>(widget, direction, player->getCompteur(), player->getSide()));
 }
 
 std::map<int, int> Board::canExit(std::unique_ptr<Player> &player) {
@@ -280,7 +287,6 @@ void Board::move(std::unique_ptr<Player> &player) {
 
 void Board::rotate(std::unique_ptr<Player> &player) {
 
-    char direction_entry{' '};
 
     display();
     displayPawnCoordinates(player);
@@ -288,53 +294,9 @@ void Board::rotate(std::unique_ptr<Player> &player) {
     int position_x{my_pawn_coordinates.first};
     int position_y{my_pawn_coordinates.second};
 
-    try {
-        // while (true){
-        std::cout << "Please enter your new direction " << std::endl;
-        std::cin >> direction_entry;
-        clear();
-        switch (direction_entry) {
-            case 't' :
-                if (board[position_x - 1][position_y - 1]->getDirection() != 't') {
-                    board[position_x - 1][position_y - 1]->setEdirection(Direction::TOP);
-                    break;
-                } else {
-                    throw std::domain_error("Invalid entry ");
-                }
-            case 'd':
-                if (board[position_x - 1][position_y - 1]->getDirection() != 'd') {
-                    board[position_x - 1][position_y - 1]->setEdirection(Direction::DOWN);
-                    break;
-                } else {
-                    throw std::domain_error("Invalid entry ");
-                }
+    choice_to_rotate(position_x,position_y);
 
-            case 'r':
-                if (board[position_x - 1][position_y - 1]->getDirection() != 'r') {
-                    board[position_x - 1][position_y - 1]->setEdirection(Direction::RIGHT);
-                    break;
-                } else {
-                    throw std::domain_error("Invalid entry ");
-                }
 
-            case 'l' :
-                if (board[position_x - 1][position_y - 1]->getDirection() != 'l') {
-                    board[position_x - 1][position_y - 1]->setEdirection(Direction::LEFT);
-                    break;
-                } else {
-                    throw std::domain_error("Invalid entry ");
-                }
-
-            default:
-                throw std::domain_error("Invalid entry ");
-        }
-
-        // }
-    }
-    catch (std::exception const &e) {
-        std::cerr << "Erreur" << e.what() << std::endl;
-
-    }
 }
 
 std::pair<int, int> Board::directionToPair(char edirection) {
@@ -470,6 +432,60 @@ std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
     return std::make_pair(position_x, position_y);
 }
 
+void Board :: choice_to_rotate(int position_x , int position_y)
+{
+    char direction_entry{' '};
+
+    try {
+        // while (true){
+        std::cout << "Please enter your new direction " << std::endl;
+        std::cin >> direction_entry;
+        clear();
+        switch (direction_entry) {
+            case 't' :
+                if (board[position_x - 1][position_y - 1]->getDirection() != 't') {
+                    board[position_x - 1][position_y - 1]->setEdirection(Direction::TOP);
+                    break;
+                } else {
+                    throw std::domain_error("Invalid entry ");
+                }
+            case 'd':
+                if (board[position_x - 1][position_y - 1]->getDirection() != 'd') {
+                    board[position_x - 1][position_y - 1]->setEdirection(Direction::DOWN);
+                    break;
+                } else {
+                    throw std::domain_error("Invalid entry ");
+                }
+
+            case 'r':
+                if (board[position_x - 1][position_y - 1]->getDirection() != 'r') {
+                    board[position_x - 1][position_y - 1]->setEdirection(Direction::RIGHT);
+                    break;
+                } else {
+                    throw std::domain_error("Invalid entry ");
+                }
+
+            case 'l' :
+                if (board[position_x - 1][position_y - 1]->getDirection() != 'l') {
+                    board[position_x - 1][position_y - 1]->setEdirection(Direction::LEFT);
+                    break;
+                } else {
+                    throw std::domain_error("Invalid entry ");
+                }
+
+            default:
+                throw std::domain_error("Invalid entry ");
+        }
+
+        // }
+    }
+    catch (std::exception const &e) {
+        std::cerr << "Erreur" << e.what() << std::endl;
+
+    }
+
+
+}
 
 
 

@@ -35,6 +35,7 @@ private:
     std::pair<int, int> getCoordinates();
     std::pair<int,int>  chooseAPawn(std::unique_ptr<Player>&);
     int  directionToInt (char edirction);
+    void choice_to_rotate(int, int );
 
 
 public:
