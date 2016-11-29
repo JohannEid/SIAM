@@ -107,13 +107,14 @@ void Board::move(std::unique_ptr<Player> &player) {
     std::pair<int, int> my_direction = directionToPair(board[position_x - 1][position_y - 1]->getDirection());
     //if it is out of range ... make empty no increase compteur
     if ((position_x - 1 + my_direction.first < 0)
-        || (position_x - 1 + my_direction.first >= board_width)
-        || (position_y - 1 + my_direction.second >= board_height)
+        || (position_x - 1 + my_direction.first > board_width - 1)
+        || (position_y - 1 + my_direction.second > board_height - 1)
         || (position_y - 1 + my_direction.second < 0)) {
         board[position_x - 1][position_y - 1] = std::make_shared<Empty>();
     }
 // if nothing in front
-    else if  (board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second]->getFront_resistance() == 0) {
+    else if (board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second]->getFront_resistance() ==
+             0) {
         std::swap(board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second],
                   board[position_x - 1][position_y - 1]);
     } else {
@@ -203,23 +204,20 @@ void Board::move(std::unique_ptr<Player> &player) {
                 else if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
                          || (x + my_direction.first > board_width - 1)
                          || (y + my_direction.second > board_height - 1)) {
-                    board[x][y] = std::make_shared<Empty>();
                     //if the one exiting board is a mountain
-                    if (board[x][y]->getFront_resistance() == 0.09) {
+                    if (board[x][y]->getFront_resistance() == front_resistance_of_mountain) {
                         //how many lhs and rhs next to spot of exit
                         int compteur_of_player_lhs{0};
                         int compteur_of_player_rhs{0};
 
 //allows to detect the spots next to exit moutain  and mark to whom is belongs increments compteur each time
                         if (x - 1 >= 0) {
-                            std::cout << "haut bon " << std::endl;
                             if (board[x - 1][y]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
                             else if (board[x - 1][y]->getSide() == Player_side::RHS)
                                 compteur_of_player_rhs++;
                         }
                         if (x + 1 <= board_width - 1) {
-                            std::cout << "bas bon " << std::endl;
 
                             if (board[x + 1][y]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
@@ -227,7 +225,6 @@ void Board::move(std::unique_ptr<Player> &player) {
                                 compteur_of_player_rhs++;
                         }
                         if (y - 1 >= 0) {
-                            std::cout << "gauche bon " << std::endl;
 
                             if (board[x][y - 1]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
@@ -235,7 +232,6 @@ void Board::move(std::unique_ptr<Player> &player) {
                                 compteur_of_player_rhs++;
                         }
                         if (y + 1 <= board_height - 1) {
-                            std::cout << "droite  bon " << std::endl;
 
                             if (board[x][y + 1]->getSide() == Player_side::LHS) {
                                 compteur_of_player_lhs++;
@@ -256,6 +252,8 @@ void Board::move(std::unique_ptr<Player> &player) {
 
 
                     }
+
+                    board[x][y] = std::make_shared<Empty>();
 
                 } else {
                     board[x + my_direction.first][y + my_direction.second] = board[x][y];
