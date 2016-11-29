@@ -8,7 +8,6 @@ Board::Board() {
     Board::board.resize(board_width, std::vector<std::shared_ptr<Object>>
             (board_height, std::make_shared<Empty>()));
 
-
     for (unsigned int i(0); i < number_of_mountain; i++) {
         Board::board[mountain_x][side_distance + i] =
                 std::make_shared<Mountain>();
@@ -101,7 +100,6 @@ void Board::exit(std::unique_ptr<Player> &player) {
 
 void Board::move(std::unique_ptr<Player> &player) {
 
-    displayPawnCoordinates(player);
     std::pair<int, int> my_pawn_coordinates = chooseAPawn(player);
     int position_x{my_pawn_coordinates.first};
     int position_y{my_pawn_coordinates.second};
@@ -174,58 +172,79 @@ void Board::move(std::unique_ptr<Player> &player) {
 
             }
             while (true) {
+                //if back to move spot
                 if ((x == position_x - 1) && (y == position_y - 1)) {
+                    //if out of reach... exit board
                     if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
                         || (x + my_direction.first > board_width - 1)
                         || (y + my_direction.second > board_height - 1)) {
                         board[x][y] = std::make_shared<Empty>();
+                        //when we reach this pawn we stop looping
                         break;
 
-                    } else {
+                    }
+                        //else shift
+                    else {
                         board[x + my_direction.first][y + my_direction.second] = board[x][y];
                         board[x][y] = std::make_shared<Empty>();
+                        //when we reach this pawn we stop looping
                         break;
                     }
 
-                } else if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
-                           || (x + my_direction.first > board_width - 1)
-                           || (y + my_direction.second > board_height - 1)) {
+                }
+                    //if out of reach ... exit board
+                else if ((x + my_direction.first < 0) || (y + my_direction.second < 0)
+                         || (x + my_direction.first > board_width - 1)
+                         || (y + my_direction.second > board_height - 1)) {
                     board[x][y] = std::make_shared<Empty>();
+                    //if the one exiting board is a mountain
                     if (board[x][y]->getFront_resistance() == 0.09) {
+                        //how many lhs and rhs next to spot of exit
                         int compteur_of_player_lhs{0};
                         int compteur_of_player_rhs{0};
 
-
+//allows to detect the spots next to exit moutain  and mark to whom is belongs increments compteur each time
                         if (x - 1 >= 0) {
+                            std::cout << "haut bon " << std::endl;
                             if (board[x - 1][y]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
                             else if (board[x - 1][y]->getSide() == Player_side::RHS)
                                 compteur_of_player_rhs++;
                         }
                         if (x + 1 <= board_width - 1) {
+                            std::cout << "bas bon " << std::endl;
+
                             if (board[x + 1][y]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
                             else if (board[x + 1][y]->getSide() == Player_side::RHS)
                                 compteur_of_player_rhs++;
-
                         }
                         if (y - 1 >= 0) {
+                            std::cout << "gauche bon " << std::endl;
+
                             if (board[x][y - 1]->getSide() == Player_side::LHS)
                                 compteur_of_player_lhs++;
                             else if (board[x][y - 1]->getSide() == Player_side::RHS)
                                 compteur_of_player_rhs++;
                         }
                         if (y + 1 <= board_height - 1) {
-                            if (board[x][y + 1]->getSide() == Player_side::LHS)
+                            std::cout << "droite  bon " << std::endl;
+
+                            if (board[x][y + 1]->getSide() == Player_side::LHS) {
                                 compteur_of_player_lhs++;
-                            else if (board[x][y + 1]->getSide() == Player_side::RHS)
+                            } else if (board[x][y + 1]->getSide() == Player_side::RHS) {
                                 compteur_of_player_rhs++;
+                            }
                         }
+
                         if (compteur_of_player_lhs > compteur_of_player_rhs) {
                             setVictory_condition(1);
 
                         } else if (compteur_of_player_lhs < compteur_of_player_rhs) {
                             setVictory_condition(2);
+                        } else {
+                            std::cout << "nobody won equal number of pawn next to the exit of mountain !! "
+                                      << std::endl;
                         }
 
 
@@ -234,6 +253,7 @@ void Board::move(std::unique_ptr<Player> &player) {
                 } else {
                     board[x + my_direction.first][y + my_direction.second] = board[x][y];
                 }
+                //goes towards pawn that started the move
                 x -= my_direction.first;
                 y -= my_direction.second;
 
@@ -424,10 +444,11 @@ void Board::display() {
 std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
     int position_x{0};
     int position_y{0};
+    display();
+    displayPawnCoordinates(player);
 
     while (true) {
         try {
-            display();
             std::cin >> position_x;
             std::cin >> position_y;
             if (board[position_x - 1][position_y - 1]->getSide() == player->getSide())

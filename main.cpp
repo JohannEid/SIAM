@@ -22,18 +22,19 @@ int main() {
         //call of choose function for right player
 
         //if right player concedes or left player exits mountain so right wins
-
-       /* choose_action(p_rhs, board);
+/*
+        choose_action(p_rhs, board);
         if (Board::getVictory_condition() == 2) {
             std::cout << "PLayer : " << p_lhs->getName() << " wins!" << std::endl;
             break;
         }
-        */
+
 
     }
-    saveFile(board,p_lhs,p_rhs);
+    */
 
+        saveFile(board, p_lhs, p_rhs);
 
-
-    return 0;
+        return 0;
+    }
 }
