@@ -105,8 +105,15 @@ void Board::move(std::unique_ptr<Player> &player) {
     int position_y{my_pawn_coordinates.second};
 
     std::pair<int, int> my_direction = directionToPair(board[position_x - 1][position_y - 1]->getDirection());
-
-    if (board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second]->getFront_resistance() == 0) {
+    //if it is out of range ... make empty no increase compteur
+    if ((position_x - 1 + my_direction.first < 0)
+        || (position_x - 1 + my_direction.first >= board_width)
+        || (position_y - 1 + my_direction.second >= board_height)
+        || (position_y - 1 + my_direction.second < 0)) {
+        board[position_x - 1][position_y - 1] = std::make_shared<Empty>();
+    }
+// if nothing in front
+    else if  (board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second]->getFront_resistance() == 0) {
         std::swap(board[position_x - 1 + my_direction.first][position_y - 1 + my_direction.second],
                   board[position_x - 1][position_y - 1]);
     } else {
