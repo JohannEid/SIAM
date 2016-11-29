@@ -110,6 +110,7 @@ void Board::move(std::unique_ptr<Player> &player) {
     std::pair<int, int> my_pawn_coordinates = chooseAPawn(player);
     int position_x{my_pawn_coordinates.first};
     int position_y{my_pawn_coordinates.second};
+    choice_to_rotate(position_x,position_y);
 
     std::pair<int, int> my_direction = directionToPair(board[position_x - 1][position_y - 1]->getDirection());
     //if it is out of range ... make empty no increase compteur
