@@ -12,7 +12,7 @@ int main() {
 
     while (true) {
 //call of choose function for left player
-        choose_action(p_lhs, board);
+        choose_action(p_lhs,board);
         //if left player concedes or right players exits mountain so right wins
         if (Board::getVictory_condition() == 1) {
             std::cout << "PLayer : " << p_rhs->getName() << " wins!" << std::endl;

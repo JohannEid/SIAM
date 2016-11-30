@@ -9,6 +9,6 @@
 #include "Player.h"
 #include "Header.h"
 
-void choose_action( std::unique_ptr<Player> & my_player,
-                    std::unique_ptr<Board>& board );
+void choose_action(std::unique_ptr<Player> &my_player,
+                   std::unique_ptr<Board> &board);
 #endif //SIAM02_PLAYER_SUB_METHODS_H

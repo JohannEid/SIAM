@@ -47,6 +47,8 @@ public:
     void setCompteur(int compteur) {
         Player::compteur = compteur;
     }
+    //virtual void choose_action(std::unique_ptr<Board>& board );
+
 
 
 
@@ -56,6 +58,23 @@ public:
 
 class Player_ai : public Player
 {
+private:
+    void chooseEnterPawn(std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
+    void chooseMovePawn (std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
+    void choooseExitPawn (std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
+    std::vector <std::pair<int,int>>   mappingOfMountain (std::unique_ptr<Board> &board);
+
+
+
+
+
+public:
+
+    Player_ai(Player_side side):Player(side)
+    {}
+    void chooseAction(std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
+
+
 
 
 
