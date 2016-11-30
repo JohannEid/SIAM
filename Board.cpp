@@ -28,8 +28,6 @@ void Board::enter_a_pawn(std::unique_ptr<Player> &player) {
              std::make_shared<Animal>(widget, direction, player->getCompteur(), player->getSide()));
 
     choice_to_rotate(my_coordinates.first + 1, my_coordinates.second + 1);
-
-
 }
 
 std::map<int, int> Board::canExit(std::unique_ptr<Player> &player) {
@@ -181,13 +179,11 @@ void Board::displayPawnCoordinates(std::unique_ptr<Player> &player) {
 
         }
     }
-
-
 }
 
 std::pair<int, int> Board::getCoordinates(std::unique_ptr<Player> &player) {
-    int position_x{0};
-    int position_y{0};
+    std::string my_position_x{" "};
+    std::string my_position_y{" "};
 
     while (true) {
 
@@ -196,8 +192,12 @@ std::pair<int, int> Board::getCoordinates(std::unique_ptr<Player> &player) {
         std::cout << "Position in x: " << std::endl;
         std::cout << "Position in y: " << std::endl;
         try {
-            std::cin >> position_x;
-            std::cin >> position_y;
+            std::cin >> my_position_x;
+            std::cin >> my_position_y;
+
+            int position_x = std::stoi(my_position_x);
+            int position_y = std::stoi(my_position_y);
+
 
             if (((position_x == min_board_width) && ((min_board_height <= position_y) && (position_y <= board_height)))
                 ||
@@ -263,6 +263,8 @@ void Board::display() {
 }
 
 std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
+    std::string my_position_x{" "};
+    std::string my_position_y{" "};
     int position_x{0};
     int position_y{0};
     display();
@@ -270,8 +272,12 @@ std::pair<int, int> Board::chooseAPawn(std::unique_ptr<Player> &player) {
 
     while (true) {
         try {
-            std::cin >> position_x;
-            std::cin >> position_y;
+            std::cin >> my_position_x;
+            std::cin >> my_position_y;
+
+            position_x = std::stoi(my_position_x);
+            position_y = std::stoi(my_position_y);
+
             if (board[position_x - 1][position_y - 1]->getSide() == player->getSide())
                 break;
             else

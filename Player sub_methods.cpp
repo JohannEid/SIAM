@@ -7,7 +7,7 @@
 
 void choose_action(std::unique_ptr<Player> &my_player,
                    std::unique_ptr<Board> &board) {
-    unsigned int entry{0};
+    std::string my_entry{" "};
     while (true) {
         try {
             board->display();
@@ -22,8 +22,9 @@ void choose_action(std::unique_ptr<Player> &my_player,
 
 
 
-            std::cin >> entry;
+            std::cin >> my_entry;
             clear();
+            int entry = std::stoi(my_entry);
 
 
             if ((entry == 1) && (my_player->getCompteur() < max_pawn_number)) {
