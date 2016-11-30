@@ -54,4 +54,12 @@ public:
 };
 
 
+class Player_ai : public Player
+{
+
+
+
+};
+
+
 #endif //SIAM02_PLAYER_H
