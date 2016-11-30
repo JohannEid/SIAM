@@ -32,10 +32,13 @@ private:
 
     std::pair<int,int> directionToPair(char edirection);
     void displayPawnCoordinates(std::unique_ptr<Player>&);
-    std::pair<int, int> getCoordinates();
+    std::pair<int, int> getCoordinates(std::unique_ptr<Player>&);
     std::pair<int,int>  chooseAPawn(std::unique_ptr<Player>&);
     int  directionToInt (char edirction);
     void choice_to_rotate(int, int );
+    void movePawnInFront(std::unique_ptr<Player> &my_player,
+                                int position_x,int position_y,std::pair<int,int> my_direction );
+
 
 
 public:
