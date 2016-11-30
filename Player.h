@@ -12,22 +12,23 @@
 const int max_pawn_number = 5;
 
 class Player {
-private :
+public:
 
     int compteur = 0;
-    std::string name;
+    std::string name = "my_name";
     Player_side side;
 
 public:
 
     ///CONSTRUCTOR
-    Player(Player_side side);
+    Player(Player_side side, std::string name = "default");
+    ~Player() {}
 
     ///INITIALISER
-    void initName();
+     void initName(std::string name);
 
     ///METHODS ENTER MOVE EXIT
-    //void choose_action(std::unique_ptr<Board> &);
+    //void choose_action(std::unique_ptr<Board> &)
 
     ///GETTER
 
@@ -62,7 +63,7 @@ private:
     void chooseEnterPawn(std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
     void chooseMovePawn (std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
     void choooseExitPawn (std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
-    std::vector <std::pair<int,int>>   mappingOfMountain (std::unique_ptr<Board> &board);
+    std::vector <std::pair<int,int>>  mappingOfMountain (std::unique_ptr<Board> &board);
 
 
 
@@ -70,7 +71,7 @@ private:
 
 public:
 
-    Player_ai(Player_side side):Player(side)
+    Player_ai(Player_side side):Player(side,"Ai")
     {}
     void chooseAction(std::unique_ptr<Board> &board,std::unique_ptr<Player>& );
 

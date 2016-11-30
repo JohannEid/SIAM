@@ -4,11 +4,15 @@
 #include "Player sub_methods.h"
 #include "utilities .h"
 
-int main() {
 
+
+int main()
+{
     std::unique_ptr<Board> board(new Board());
     std::unique_ptr<Player> p_lhs(new Player(Player_side::LHS));
     std::unique_ptr<Player> p_rhs(new Player(Player_side::RHS));
+    std::unique_ptr<Player_ai> p_ai(new Player_ai(Player_side::LHS));
+
 
     while (true) {
 //call of choose function for left player

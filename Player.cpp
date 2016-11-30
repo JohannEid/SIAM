@@ -6,13 +6,17 @@
 #include "Player sub_methods.h"
 
 
-Player::Player(Player_side side) : compteur(0), side(side) { initName(); }
+Player::Player(Player_side side,std::string name ) : compteur(0), side(side) {initName(name);}
 
 
-void Player::initName() {
-    std::cout << "Please choose a player name" << std::endl;
-    std::cin >> Player::name;
-    clear();
+void Player::initName(std::string name = "default") {
+    if(name == "default")
+    {
+        std::cout << "Please choose a player name" << std::endl;
+        std::cin >> Player::name;
+        clear();
+    }
+
 
 }
 
@@ -102,15 +106,13 @@ void Player_ai::chooseMovePawn(std::unique_ptr<Board> &board, std::unique_ptr<Pl
 void Player_ai::choooseExitPawn(std::unique_ptr<Board> &board, std::unique_ptr<Player> &player) {
 
 }
-std::vector <std::pair<int,int>> Player_ai :: mappingOfMountain (std::unique_ptr<Board> &board)
-{
-    std::vector< std::pair<int,int>> map_of_mountain;
-    for (unsigned int i{0}; i < board_width; ++i)
-    {
-        for (unsigned  int j {0}; j < board_height ; ++j) {
-            if(board -> getObject(i,j)->getFront_resistance() == front_resistance_of_mountain)
-            {
-                map_of_mountain.push_back(std::make_pair(i,j));
+
+std::vector<std::pair<int, int>> Player_ai::mappingOfMountain(std::unique_ptr<Board> &board) {
+    std::vector<std::pair<int, int>> map_of_mountain;
+    for (unsigned int i{0}; i < board_width; ++i) {
+        for (unsigned int j{0}; j < board_height; ++j) {
+            if (board->getObject(i, j)->getFront_resistance() == front_resistance_of_mountain) {
+                map_of_mountain.push_back(std::make_pair(i, j));
             }
 
         }
